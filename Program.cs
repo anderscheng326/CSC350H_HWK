@@ -17,9 +17,8 @@ string menuSelection = "";
 string[,] ourAnimals = new string[maxPets, 6];
 
 /**
-DONE -UNIT 3: Convert the if-elseif-else construct to a switch statement 
-DONE -UNIT 3: Created do while loop for menuSelection 
-DONE -UNIT 3: created switch in menuSelection and added placeholders
+DONE -UNIT 4: created loop for case1 to display one pet data 
+DONE -UNIT 4: added nested loop to display all pet data 
 **/
 
 
@@ -116,7 +115,17 @@ do
     {
         case "1":
             //list all of our current pet information
-            Console.WriteLine("this app feature is coming soon - please check back to see progress!");
+            for (int i = 0; i <maxPets; i++)
+            {
+                if (ourAnimals[i,0] != "ID #: ")
+                {
+                    Console.WriteLine();
+                    for (int j = 0; j < 6; j++)
+                    {
+                        Console.WriteLine(ourAnimals[i,j]);
+                    }
+                }
+            }
             Console.WriteLine("Press the Enter key to continue.");
             readResult = Console.ReadLine();
             break;
