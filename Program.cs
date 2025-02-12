@@ -130,7 +130,42 @@ do
 
         case "2":
             // Display all dogs with a specified characteristic
-            Console.WriteLine("\nUNDER CONSTRUCTION - please check back next month to see progress.");
+            string dogCharacteristic = "";
+
+            while (dogCharacteristic == "")
+            {
+                //user enter physical char to search
+                Console.WriteLine($"\nEnter one deisred dog characteristics to search for");
+                readResult = Console.ReadLine();
+                if (readResult != null)
+                {
+                    dogCharacteristic = readResult.ToLower().Trim();
+                }
+            }
+            
+            string dogDescription = "";
+            bool noMatchesDog = true;
+            //#6 loop through animals to search
+            for (int i = 0; i < maxPets; i++)
+            {
+                if(ourAnimals[i,1].Contains("dog"))
+                {
+                    //#7 search combined descriptions
+                    dogDescription = ourAnimals[i,4] + "\n" +ourAnimals[i,5];
+                    if (dogDescription.Contains(dogCharacteristic))
+                    {
+                        Console.WriteLine($"\nOur dog {ourAnimals[i,3]} is a match!");
+                        Console.WriteLine(dogDescription);
+                        noMatchesDog = false;
+                    }
+                }
+            }
+
+            if (noMatchesDog)
+            {
+                Console.WriteLine("None of our dogs are a match found for: "+ dogCharacteristic);
+            }
+
             Console.WriteLine("Press the Enter key to continue.");
             readResult = Console.ReadLine();
             break;
