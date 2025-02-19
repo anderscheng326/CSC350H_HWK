@@ -28,6 +28,12 @@ InitializeGame();
 while (!shouldExit) 
 {
     Move();
+    if(TerminalResized())  //ends program if terminal resized
+    {
+        Console.Clear();
+        Console.WriteLine("Console was Rezied. Program exiting.");
+        shouldExit = true;
+    }
 }
 
 // Returns true if the Terminal was resized 
@@ -89,6 +95,12 @@ void Move()
 		case ConsoleKey.Escape:     
             shouldExit = true; 
             break;
+        default:    //default case for nondierctional key input
+            Console.Clear();
+            Console.WriteLine("Nondirectional Key Input. Program exiting.");
+            shouldExit = true;
+            break;
+
     }
 
     // Clear the characters at the previous position
