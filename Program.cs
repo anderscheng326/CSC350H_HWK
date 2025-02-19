@@ -34,6 +34,14 @@ while (!shouldExit)
         Console.WriteLine("Console was Rezied. Program exiting.");
         shouldExit = true;
     }
+    else
+    {
+        if(AteFood())
+        {
+            ChangePlayer();
+            ShowFood();
+        }
+    }
 }
 
 // Returns true if the Terminal was resized 
@@ -92,7 +100,9 @@ void Move()
 		case ConsoleKey.RightArrow: 
             playerX++; 
             break;
-		case ConsoleKey.Escape:     
+		case ConsoleKey.Escape:
+            Console.Clear();
+            Console.WriteLine("Game Over! Program exiting.");     
             shouldExit = true; 
             break;
         default:    //default case for nondierctional key input
@@ -117,6 +127,15 @@ void Move()
     // Draw the player at the new location
     Console.SetCursorPosition(playerX, playerY);
     Console.Write(player);
+}
+
+bool AteFood() //bool to check if player and food are same position
+{
+    if(playerY == foodY && playerX == foodX)
+    {
+        return true;
+    }
+    return false;
 }
 
 // Clears the console, displays the food and player
