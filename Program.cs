@@ -27,7 +27,6 @@ int food = 0;
 InitializeGame();
 while (!shouldExit) 
 {
-    Move();
     if(TerminalResized())  //ends program if terminal resized
     {
         Console.Clear();
@@ -36,11 +35,21 @@ while (!shouldExit)
     }
     else
     {
+        if(PlayerIsHappy())
+        {
+            Move(1);
+        }
+        else if(PlayerIsSick())
+        {
+            FreezePlayer();
+        }
+        else
+        Move();
         if(AteFood())
         {
             ChangePlayer();
             ShowFood();
-        }
+        } 
     }
 }
 
@@ -81,7 +90,7 @@ void FreezePlayer()
 }
 
 // Reads directional input from the Console and moves the player
-void Move() 
+void Move(int speed = 1) 
 {
     int lastX = playerX;
     int lastY = playerY;
@@ -95,10 +104,10 @@ void Move()
             playerY++; 
             break;
 		case ConsoleKey.LeftArrow:  
-            playerX--; 
+            playerX-=speed; 
             break;
 		case ConsoleKey.RightArrow: 
-            playerX++; 
+            playerX+=speed; 
             break;
 		case ConsoleKey.Escape:
             Console.Clear();
@@ -132,6 +141,24 @@ void Move()
 bool AteFood() //bool to check if player and food are same position
 {
     if(playerY == foodY && playerX == foodX)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool PlayerIsSick()
+{
+    if(player.Equals(states[2]))
+    {
+        return true;
+    }
+    return false;
+}
+
+bool PlayerIsHappy()
+{
+     if(player.Equals(states[1]))
     {
         return true;
     }
