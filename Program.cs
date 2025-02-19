@@ -11,7 +11,7 @@ string[] pettingZoo =
 
 RandomizeAnimals();
 
-//AssignGroup();
+AssignGroup();
 
 Console.WriteLine("School A");
 
@@ -19,7 +19,7 @@ Console.WriteLine("School A");
 
 //var group = AssignGroup();
 
-//string[,] group = AssignGroup();
+string[,] group = AssignGroup();
 
 void RandomizeAnimals()
 {
@@ -35,7 +35,27 @@ void RandomizeAnimals()
     }
 }
 
+/* testcase for animal shuffle - prints animals
 foreach(string animal in pettingZoo)
 {
     Console.WriteLine(animal);
+}
+*/
+
+string[,] AssignGroup(int groups = 6)
+{
+    string[,] result = new string[groups, pettingZoo.Length/groups]; // using 2d array to figure out the groups
+
+    int start = 0;
+
+    for (int i = 0; i < groups; i++) //outer loop cycles through each group
+    {
+        for (int j = 0; j < result.GetLength(1); j++) //inner loop cycles for # of animals groups should have
+        {
+            result[i,j] = pettingZoo[start++];
+        }
+    }
+
+    return result;
+
 }
